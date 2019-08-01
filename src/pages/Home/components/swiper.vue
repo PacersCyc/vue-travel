@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper">
-    <swiper :options="swiperOption">
+    <!-- 利用v-if避免空数组创建的轮播图在数据渲染后出现最后一张占位的情况 -->
+    <swiper :options="swiperOption" v-if="showSwipers">
       <!-- slides -->
-      <swiper-slide v-for="item of swiperList" :key="item.id">
+      <swiper-slide v-for="item of list" :key="item.id">
         <img class="swiper-img" :src="item.imgUrl" alt="">
       </swiper-slide>
       <!-- Optional controls -->
@@ -19,26 +20,26 @@ export default {
     swiper,
     swiperSlide
   },
+  props: {
+    list: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
-        loop: true
-      },
-      swiperList: [
-        {
-          id: '0001',
-          imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20197/6875979c607515c27de528361ab1e55e.jpg_750x200_9db3d155.jpg'
-        },
-        {
-          id: '0002',
-          imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/d7bbc21db442366a882e04ddc984669a.jpg_750x200_85e640d9.jpg'
-        },
-        {
-          id: '0003',
-          imgUrl: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/87a224d0349d94a11e97f31aa1aba4f5.jpg_750x200_1f78af87.jpg'
-        }
-      ]
+        loop: true,
+        autoPlay: true
+      }
+    }
+  },
+  computed: {
+    showSwipers () {
+      return this.list.length
     }
   }
 }
@@ -50,7 +51,7 @@ export default {
   .wrapper
     width: 100%;
     height: 0;
-    padding-bottom: 26.66667%;
+    padding-bottom: 31.25%;
     overflow hidden;
     background-color: #eee;
     .swiper-img
