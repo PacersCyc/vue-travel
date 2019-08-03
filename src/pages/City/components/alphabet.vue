@@ -9,9 +9,9 @@ export default {
   name: 'cityAlphabet',
   props: {
     cities: {
-      type: Array,
+      type: Object,
       default () {
-        return []
+        return {}
       }
     }
   }
