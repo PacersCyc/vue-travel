@@ -23,5 +23,12 @@ export default new Router({
       name: 'detail',
       component: Detail
     }
-  ]
+  ],
+  // 取消路由跳转后滚动行为
+  scrollBehavior (to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })
