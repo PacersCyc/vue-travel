@@ -10,16 +10,20 @@
         </div>
       </div>
     </div>
-    <common-gallery :imgs="galleryImgs" v-show="showGallery" @close="handleGalleryClose"></common-gallery>
+    <fade-animation>
+      <common-gallery :imgs="galleryImgs" v-show="showGallery" @close="handleGalleryClose"></common-gallery>
+    </fade-animation>
   </div>
 </template>
 
 <script>
+import FadeAnimation from 'common/fade/fade'
 import CommonGallery from 'common/gallery/gallery'
 export default {
   name: 'detailBanner',
   components: {
-    CommonGallery
+    CommonGallery,
+    FadeAnimation
   },
   props: {
     sightName: String,
@@ -28,10 +32,6 @@ export default {
   },
   data () {
     return {
-      imgs: [
-        'http://img1.qunarzz.com/sight/p0/201405/29/0290f90b03596cdef35d73e753e635ee.jpg_r_800x800_c2193e10.jpg',
-        'http://img1.qunarzz.com/sight/p58/201211/09/14c6f220cc746b0693835fbb.jpg_r_800x800_7c83bd12.jpg'
-      ],
       showGallery: false
     }
   },
